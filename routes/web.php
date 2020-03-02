@@ -14,3 +14,21 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::prefix('goods')->group(function(){
+    Route::get('create','GoodsController@create');
+    Route::post('store','GoodsController@store');
+    Route::get('index','GoodsController@index');
+    Route::get('destroy/{id}','GoodsController@destroy');
+    Route::get('edit/{id}','GoodsController@edit');
+    Route::post('update/{id}','GoodsController@update');
+});
+
+Route::prefix('brand')->group(function(){
+	Route::get('create','BrandController@create');
+	Route::post('store','BrandController@store');
+	Route::get('index','BrandController@index');
+	Route::get('edit/{id}','BrandController@edit');
+	Route::post('update/{id}','BrandController@update');
+	Route::get('destroy/{id}','BrandController@destroy');
+});
