@@ -14,7 +14,7 @@
 Route::get('/', function () {
     return view('welcome');
 });
-Route::prefix('/cate')->group(function(){
+Route::prefix('/cate')->middleware('checklogin')->group(function(){
     Route::get('index','CategoryController@index');
     Route::get('create','CategoryController@create');
     Route::post('store','CategoryController@store');
@@ -23,3 +23,28 @@ Route::prefix('/cate')->group(function(){
     Route::get('destroy/{id}','CargoryController@destroy');
 
  });
+
+//登录
+Route::get('/login', 'LoginController@login');
+
+Route::post('/loginDo', 'LoginController@loginDo');
+
+Route::get('/test', 'LoginController@test');
+
+//管理员管理
+Route::prefix('admin')->middleware('checklogin')->group(function (){
+
+    Route::get('create', 'AdminController@create');
+
+    Route::post('store', 'AdminController@store');
+
+    Route::get('index', 'AdminController@index');
+
+    Route::get('edit/{id}', 'AdminController@edit');
+
+    Route::post('update/{id}', 'AdminController@update');
+
+    Route::get('destroy/{id}', 'AdminController@destroy');
+
+    Route::post('checkOnly', 'AdminController@checkOnly');
+});
